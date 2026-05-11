@@ -4,6 +4,7 @@ from typing import List
 class Settings:
     PROJECT_NAME: str = "MyFin App"
     VERSION: str = "1.0.0"
+    DESCRIPTION: str = "Personal Finance Tracker API"
     API_PREFIX: str = "/api/v1"  # You can use this later for versioning
 
     # CORS

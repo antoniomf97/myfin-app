@@ -3,14 +3,18 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import settings
 from app.database import engine, Base
-from app.routers import transactions
+from app.routers import transactions, analytics
 
 # Create all database tables
 Base.metadata.create_all(bind=engine)
 
-app = FastAPI(title="Finance Tracker API", version="1.0.0")
+app = FastAPI(
+    title=settings.PROJECT_NAME,
+    version=settings.VERSION,
+    description=settings.DESCRIPTION,
+)
 
-# CORS configuration (allows React frontend to call this API)
+# CORS configuration (allows frontend to call this API)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.BACKEND_CORS_ORIGINS,
@@ -20,6 +24,7 @@ app.add_middleware(
 )
 
 app.include_router(transactions.router)
+app.include_router(analytics.router)
 
 
 @app.get("/")

@@ -34,3 +34,19 @@ class TransactionResponse(BaseModel):
 
     class Config:
         from_attributes = True  # Allows conversion from SQLAlchemy models
+
+
+class SummaryResponse(BaseModel):
+    total_income: float
+    total_expenses: float
+    net_savings: float
+    start_date: Optional[date] = None
+    end_date: Optional[date] = None
+
+
+class MonthlyBreakdownItem(BaseModel):
+    year: int
+    month: int
+    total_income: float
+    total_expenses: float
+    net_savings: float
