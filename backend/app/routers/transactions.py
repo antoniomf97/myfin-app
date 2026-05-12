@@ -14,7 +14,16 @@ router = APIRouter(prefix="/transactions", tags=["transactions"])
 # CREATE: Add new transaction
 @router.post("/", response_model=TransactionResponse, status_code=201)
 def create_transaction(transaction: TransactionCreate, db: Session = Depends(get_db)):
-    """Create a new transaction (income or expense)"""
+    """
+    Create a new transaction.
+
+    - **type**: must be `income` or `expense`
+    - **amount**: must be greater than 0
+    - **category**: 1–100 characters
+    - **date**: ISO format (YYYY-MM-DD)
+    - **description**: optional free-text note
+    """
+
     db_transaction = Transaction(**transaction.model_dump())
     db.add(db_transaction)
     db.commit()
@@ -68,7 +77,11 @@ def get_transactions(
 # READ-ID: Get single transaction by ID
 @router.get("/{transaction_id}", response_model=TransactionResponse)
 def get_transaction(transaction_id: int, db: Session = Depends(get_db)):
-    """Get a specific transaction by ID"""
+    """
+    Get a single transaction by its ID.
+
+    Returns 404 if no transaction with that ID exists.
+    """
     transaction = db.query(Transaction).filter(Transaction.id == transaction_id).first()
 
     if not transaction:
@@ -86,7 +99,12 @@ def update_transaction(
     transaction_update: TransactionUpdate,
     db: Session = Depends(get_db),
 ):
-    """Update an existing transaction"""
+    """
+    Update an existing transaction.
+
+    Only the fields provided in the request body are changed; omitted fields keep their current values.
+    Returns 404 if no transaction with that ID exists.
+    """
     # Find the transaction
     db_transaction = (
         db.query(Transaction).filter(Transaction.id == transaction_id).first()
@@ -112,7 +130,11 @@ def update_transaction(
 # DELETE-ID: Delete transaction by ID
 @router.delete("/{transaction_id}", status_code=204)
 def delete_transaction(transaction_id: int, db: Session = Depends(get_db)):
-    """Delete a transaction"""
+    """
+    Delete a transaction by its ID.
+
+    Returns 204 No Content on success, 404 if the transaction does not exist.
+    """
     db_transaction = (
         db.query(Transaction).filter(Transaction.id == transaction_id).first()
     )

@@ -36,6 +36,7 @@ class TransactionResponse(BaseModel):
         from_attributes = True  # Allows conversion from SQLAlchemy models
 
 
+# Schema for analytics summary
 class SummaryResponse(BaseModel):
     total_income: float
     total_expenses: float
@@ -44,9 +45,17 @@ class SummaryResponse(BaseModel):
     end_date: Optional[date] = None
 
 
+# Schema for monthly breakdown
 class MonthlyBreakdownItem(BaseModel):
     year: int
     month: int
     total_income: float
     total_expenses: float
     net_savings: float
+
+
+# Schema for per category breakdown
+class CategoryBreakdownItem(BaseModel):
+    category: str
+    type: str
+    total: float
