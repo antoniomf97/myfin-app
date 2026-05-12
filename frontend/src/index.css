@@ -1,0 +1,18 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  --bg: #f8f9fa;
+  --surface: #ffffff;
+  --border: #e2e8f0;
+  --text: #1a202c;
+  --muted: #718096;
+  --income: #38a169;
+  --expense: #e53e3e;
+  --accent: #3182ce;
+  font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+  font-size: 15px;
+  color: var(--text);
+  background: var(--bg);
+}
+
+body { margin: 0; }
