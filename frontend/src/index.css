@@ -9,6 +9,7 @@
   --income: #38a169;
   --expense: #e53e3e;
   --accent: #3182ce;
+  --savings: #805ad5;
   font-family: system-ui, "Segoe UI", Roboto, sans-serif;
   font-size: 15px;
   color: var(--text);

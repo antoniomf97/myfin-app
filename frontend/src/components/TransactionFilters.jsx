@@ -13,6 +13,7 @@ export default function TransactionFilters({ filters, onChange }) {
         <option value="">All types</option>
         <option value="income">Income</option>
         <option value="expense">Expense</option>
+        <option value="savings">Savings</option>
       </select>
 
       <input

@@ -9,11 +9,11 @@ function formatDate(iso) {
 }
 
 function formatAmount(type, amount) {
-  const sign = type === "income" ? "+" : "-";
+  const sign = type === "income" ? "+" : type === "savings" ? "" : "-";
   return `${sign}€${amount.toFixed(2)}`;
 }
 
-export default function TransactionList() {
+export default function TransactionList({ refreshKey = 0 }) {
   const [transactions, setTransactions] = useState([]);
   const [filters, setFilters] = useState(EMPTY_FILTERS);
   const [loading, setLoading] = useState(true);
@@ -26,7 +26,7 @@ export default function TransactionList() {
       .then(setTransactions)
       .catch((e) => setError(e.message))
       .finally(() => setLoading(false));
-  }, [filters]);
+  }, [filters, refreshKey]);
 
   return (
     <div className="transaction-list">

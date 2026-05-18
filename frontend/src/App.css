@@ -94,10 +94,134 @@ tr:hover td { background: var(--bg); }
 
 .badge.income { background: #f0fff4; color: var(--income); }
 .badge.expense { background: #fff5f5; color: var(--expense); }
+.badge.savings { background: #faf5ff; color: var(--savings); }
 
 /* Amount */
 .amount.income { color: var(--income); font-weight: 600; }
 .amount.expense { color: var(--expense); font-weight: 600; }
+.amount.savings { color: var(--savings); font-weight: 600; }
+
+/* FAB */
+.fab-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.75rem;
+}
+
+.fab-button {
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 50%;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+  transition: background 0.15s, transform 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fab-button:hover { background: #2b6cb0; }
+.fab-button--active { background: #2b6cb0; transform: rotate(45deg); }
+
+/* Popover */
+.fab-popover {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.14);
+  padding: 1.25rem;
+  width: 320px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* Add transaction form */
+.add-transaction-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.form-field label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.form-field select,
+.form-field input {
+  padding: 0.45rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.9rem;
+  width: 100%;
+}
+
+.form-field select:focus,
+.form-field input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.optional {
+  font-weight: 400;
+  text-transform: none;
+  font-size: 0.75rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.btn-cancel {
+  padding: 0.45rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.btn-cancel:hover { background: var(--bg); }
+
+.btn-submit {
+  padding: 0.45rem 1.1rem;
+  border: none;
+  border-radius: 6px;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.btn-submit:hover { background: #2b6cb0; }
+.btn-submit:disabled,
+.btn-cancel:disabled { opacity: 0.6; cursor: not-allowed; }
 
 /* States */
 .count { color: var(--muted); font-size: 0.85rem; margin: 0 0 1rem; }

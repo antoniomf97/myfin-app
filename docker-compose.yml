@@ -1,0 +1,20 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      # Mounts the full backend dir so the DB file persists on the host
+      # and code changes trigger uvicorn --reload without a rebuild
+      - ./backend:/app
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      # Keep the container's node_modules — the host's Windows build won't work on Linux
+      - /app/node_modules
+    depends_on:
+      - backend

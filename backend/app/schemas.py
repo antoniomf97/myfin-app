@@ -7,7 +7,7 @@ from typing import Optional
 class TransactionCreate(BaseModel):
     date: date
     type: str = Field(
-        ..., pattern="^(income|expense)$"
+        ..., pattern="^(income|expense|savings)$"
     )  # Must be "income" or "expense"
     category: str = Field(..., min_length=1, max_length=100)
     amount: float = Field(..., gt=0)  # Must be greater than 0
@@ -17,7 +17,7 @@ class TransactionCreate(BaseModel):
 # Schema for updating a transaction (all fields optional)
 class TransactionUpdate(BaseModel):
     date: Optional[date] = None
-    type: Optional[str] = Field(None, pattern="^(income|expense)$")
+    type: Optional[str] = Field(None, pattern="^(income|expense|savings)$")
     category: Optional[str] = Field(None, min_length=1, max_length=100)
     amount: Optional[float] = Field(None, gt=0)
     description: Optional[str] = None

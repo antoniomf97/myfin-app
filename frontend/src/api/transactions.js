@@ -11,3 +11,19 @@ export async function fetchTransactions(filters = {}) {
   if (!res.ok) throw new Error("Failed to fetch transactions");
   return res.json();
 }
+
+export async function fetchCategories() {
+  const res = await fetch(`${BASE_URL}/transactions/categories`);
+  if (!res.ok) throw new Error("Failed to fetch categories");
+  return res.json();
+}
+
+export async function createTransaction(data) {
+  const res = await fetch(`${BASE_URL}/transactions/`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw new Error("Failed to create transaction");
+  return res.json();
+}

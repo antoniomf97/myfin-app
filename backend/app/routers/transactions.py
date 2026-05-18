@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy import distinct
 from sqlalchemy.orm import Session
 from datetime import date
 from typing import Optional
@@ -17,7 +18,7 @@ def create_transaction(transaction: TransactionCreate, db: Session = Depends(get
     """
     Create a new transaction.
 
-    - **type**: must be `income` or `expense`
+    - **type**: must be `income`, `expense`, or `savings`
     - **amount**: must be greater than 0
     - **category**: 1–100 characters
     - **date**: ISO format (YYYY-MM-DD)
@@ -72,6 +73,14 @@ def get_transactions(
     )
 
     return transactions
+
+
+# READ: Get distinct category names
+@router.get("/categories", response_model=list[str])
+def get_categories(db: Session = Depends(get_db)):
+    """Return a distinct sorted list of all category names across all transactions."""
+    rows = db.query(distinct(Transaction.category)).order_by(Transaction.category).all()
+    return [row[0] for row in rows]
 
 
 # READ-ID: Get single transaction by ID
