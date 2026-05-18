@@ -15,7 +15,7 @@ class Settings:
     ]
 
     # Database
-    DATABASE_URL: str = "sqlite:///./myfinapp.db"
+    DATABASE_URL: str = "sqlite:///./data/myfinapp.db"
 
 
 settings = Settings()

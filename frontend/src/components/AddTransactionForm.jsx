@@ -20,11 +20,13 @@ export default function AddTransactionForm({ onSuccess, onCancel }) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchCategories()
+    setLoadingCats(true);
+    setFormData((prev) => ({ ...prev, category: "", newCategory: "" }));
+    fetchCategories(formData.type)
       .then(setCategories)
       .catch(() => setCategories([]))
       .finally(() => setLoadingCats(false));
-  }, []);
+  }, [formData.type]);
 
   function handle(e) {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));

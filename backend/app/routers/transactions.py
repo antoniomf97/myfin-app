@@ -77,9 +77,12 @@ def get_transactions(
 
 # READ: Get distinct category names
 @router.get("/categories", response_model=list[str])
-def get_categories(db: Session = Depends(get_db)):
-    """Return a distinct sorted list of all category names across all transactions."""
-    rows = db.query(distinct(Transaction.category)).order_by(Transaction.category).all()
+def get_categories(type: Optional[str] = None, db: Session = Depends(get_db)):
+    """Return a distinct sorted list of category names, optionally filtered by transaction type."""
+    q = db.query(distinct(Transaction.category))
+    if type:
+        q = q.filter(Transaction.type == type)
+    rows = q.order_by(Transaction.category).all()
     return [row[0] for row in rows]
 
 

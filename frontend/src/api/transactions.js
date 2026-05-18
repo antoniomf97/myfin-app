@@ -12,8 +12,9 @@ export async function fetchTransactions(filters = {}) {
   return res.json();
 }
 
-export async function fetchCategories() {
-  const res = await fetch(`${BASE_URL}/transactions/categories`);
+export async function fetchCategories(type = null) {
+  const params = type ? `?type=${type}` : "";
+  const res = await fetch(`${BASE_URL}/transactions/categories${params}`);
   if (!res.ok) throw new Error("Failed to fetch categories");
   return res.json();
 }

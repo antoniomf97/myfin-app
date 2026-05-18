@@ -4,17 +4,18 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      # Mounts the full backend dir so the DB file persists on the host
-      # and code changes trigger uvicorn --reload without a rebuild
-      - ./backend:/app
+      - ./backend/app:/app/app   # hot reload
+      - db_data:/app/data        # named volume — cleared by docker compose down -v
 
   frontend:
     build: ./frontend
     ports:
       - "5173:5173"
     volumes:
-      - ./frontend:/app
-      # Keep the container's node_modules — the host's Windows build won't work on Linux
-      - /app/node_modules
+      - ./frontend/src:/app/src  # hot reload
+      - /app/node_modules        # keep container's Linux node_modules
     depends_on:
       - backend
+
+volumes:
+  db_data:
